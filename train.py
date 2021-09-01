@@ -30,7 +30,7 @@ target_net = DQN(num_actions)
 target_net.load_state_dict(policy_net.state_dict())
 target_net.eval()
 
-optimizer = optim.Adam(policy_net.parameters())
+optimizer = optim.Adam(policy_net.parameters(), lr=0.001)
 buffer = ReplayBuffer(10000)
 
 
