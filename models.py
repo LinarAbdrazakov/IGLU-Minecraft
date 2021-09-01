@@ -1,3 +1,5 @@
+# https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial9/AE_CIFAR10.html
+
 import torch
 import torch.nn as nn
 
@@ -17,10 +19,10 @@ class VisualEncoder(nn.Module):
             nn.Flatten(),
         )
 
-        n_flatten = 576
+        n_flatten = 1024
         self.linear = nn.Sequential(nn.Linear(n_flatten, features_dim), nn.ReLU())
 
-    def forward(self, x)
+    def forward(self, x):
         return self.linear(self.cnn(x))
 
 
@@ -28,7 +30,7 @@ class VisualDecoder(nn.Module):
     def __init__(self, features_dim=512):
         super(VisualEncoder, self).__init__()
 
-        n_flatten = 576
+        n_flatten = 1024
         self.linear = nn.Sequential(nn.Linear(features_dim, n_flatten), nn.ReLU())
 
         self.cnn = nn.Sequential(
@@ -70,7 +72,7 @@ class TargetEncoder(nn.Module):
         return self.linear(self.cnn(x))
 
 
-def TargetDecoder(nn.Module):
+class TargetDecoder(nn.Module):
     def __init__(self, features_dim=512):
         super(TargetDecoder, self).__init__()
 
