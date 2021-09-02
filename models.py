@@ -59,14 +59,14 @@ class TargetEncoder(nn.Module):
         self.cnn = nn.Sequential(
             nn.Conv3d(7, 32, kernel_size=5, stride=1, padding=0),
             nn.ReLU(),
-            nn.Conv3d(32, 64, kernel_size=5),
+            nn.Conv3d(32, 64, kernel_size=5, stride=1, padding=1),
             nn.ReLU(),
             nn.Conv3d(64, 64, kernel_size=3),
             nn.ReLU(),
             nn.Flatten()
         )
 
-        self.linear = nn.Sequential(nn.Linear(512, features_dim, nn.ReLU))
+        self.linear = nn.Sequential(nn.Linear(576, features_dim), nn.ReLU())
 
     def forward(self, x):
         return self.linear(self.cnn(x))
@@ -76,19 +76,19 @@ class TargetDecoder(nn.Module):
     def __init__(self, features_dim=512):
         super(TargetDecoder, self).__init__()
 
-        self.linear = nn.Sequential(nn.Linear(features_dim, 512))
+        self.linear = nn.Sequential(nn.Linear(features_dim, 576))
 
         self.cnn = nn.Sequential(
-            nn.ConvTranspose3d(),
+            nn.ConvTranspose3d(64, 64, kernel_size=3),
             nn.ReLU(),
-            nn.ConvTranspose3d(),
+            nn.ConvTranspose3d(64, 32, kernel_size=5, padding=1),
             nn.ReLU(), 
-            nn.ConvTranspose3d(),
+            nn.ConvTranspose3d(32, 7, kernel_size=5),
             nn.Tanh()
         )
 
     def forward(self, x):
         x = self.linear(x)
-        x = x.reshape(x.shape[0], 64, 1, 2, 2)
+        x = x.reshape(x.shape[0], 64, 1, 3, 3)
         x = self.cnn(x)
         return x
