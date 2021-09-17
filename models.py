@@ -28,7 +28,7 @@ class VisualEncoder(nn.Module):
 
 class VisualDecoder(nn.Module):
     def __init__(self, features_dim=512):
-        super(VisualEncoder, self).__init__()
+        super(VisualDecoder, self).__init__()
 
         n_flatten = 1024
         self.linear = nn.Sequential(nn.Linear(features_dim, n_flatten), nn.ReLU())
