@@ -41,6 +41,12 @@ class VisualDecoder(nn.Module):
             nn.ConvTranspose2d(32, 3, kernel_size=8,stride=4, padding=0),
             nn.Tanh()
         )
+    
+    def forward(self, x):
+        x = self.linear(x)
+        x = x.reshape(x.shape[0], 64, 4, 4)
+        x = self.cnn(x)
+        return x 
 
 # Target Autoencoder Parts
 
