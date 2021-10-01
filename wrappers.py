@@ -37,7 +37,7 @@ class IgluActionWrapper(gym.ActionWrapper):
             ('camera', np.array([-5.0, 0.0])),
             ('camera', np.array([0.0, 5.0])),
             ('camera', np.array([0.0, -5.0])),
-            ('camera', np.array([0.0, 0.0])), # noop
+            # ('camera', np.array([0.0, 0.0])), # noop
 
             ('forward', np.array(1)),
             
