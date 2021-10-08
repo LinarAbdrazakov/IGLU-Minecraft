@@ -8,7 +8,7 @@ from iglu.tasks import TaskSet
 from wrappers import PovOnlyWrapper, IgluActionWrapper
 from algorithms import DQN, ReplayBuffer
 
-TASK = 'C17'
+TASK = 'C22'
 BATCH_SIZE = 512
 GAMMA = 0.99
 EPS_START = 1
